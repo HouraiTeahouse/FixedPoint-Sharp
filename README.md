@@ -2,7 +2,7 @@
 
 This is a Hourai Teahosue specific fork of [RomanZhu's
 FixedPoint-Sharp](https://github.com/RomanZhu/FixedPoint-Sharp) library aimed at
-use specifically in
+use specifically in games developed in Unity 2018.3+.
 
 ## Features
 - `fp` is a Q48.16 precision fixed point value type and a drop-in replacement for
@@ -46,6 +46,28 @@ CPU-cycle efficient but can be more precise. As the target use case of this
 library is foxused on game development, FixedPoint-Sharp focuses more on
 perfromance than precision. Applications that need signifigantly more
 precision will likely need to use FixedMath.NET
+
+## Installation
+
+Installation of this package requires Unity 2018.3 or higher.
+
+Under `Packages/manifest.json`, add the following lines, then open the Unity
+Editor. Note: this will add a scoped registry to your project.
+
+```json
+{
+  "dependencies": {
+    "com.facepunch.fp": "1.0.0"
+  },
+  "scopedRegistries": [
+    {
+      "name": "Hourai Teahouse",
+      "url": "https://upm.houraiteahouse.net",
+      "scopes": ["com.houraiteahouse"]
+    }
+  ]
+}
+```
 
 ## License
 [MIT](./LICENSE)

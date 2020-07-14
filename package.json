@@ -1,0 +1,13 @@
+{
+  "author": "Hourai Teahouse",
+  "name": "com.houraiteahouse.fp",
+  "displayName": "FixedPoint-Sharp",
+  "version": "1.0.0",
+  "homepage": "https://github.com/HouraiTeahouse/FixedPoint-Sharp",
+  "bugs": "https://github.com/HouraiTeahouse/FixeddPoint-Sharp/issues",
+  "repository": "github:HouraiTeahouse/FixedPoint-Sharp",
+  "publishConfig": {
+    "registry": "https://upm.houraiteahouse.net"
+  },
+  "dependencies": {}
+}

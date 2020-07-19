@@ -1,5 +1,4 @@
 using FixedPoint;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace FPTesting {
@@ -8,20 +7,20 @@ namespace FPTesting {
         public void BoolTest()
         {
             var random = new Random(645);
-            random.NextBool().Should().Be(true);
+            Assert.That(random.NextBool(), Is.EqualTo(true));
             
             random.SetState(435);
-            random.NextBool().Should().Be(false);
+            Assert.That(random.NextBool(), Is.EqualTo(false));
         }
         
         [Test]
         public void IntTest()
         {
             var random = new Random(645);
-            random.NextInt().Should().Be(-1975191795);
+            Assert.That(random.NextInt(), Is.EqualTo(-1975191795));
             
             random.SetState(435);
-            random.NextInt().Should().Be(-2030414680);
+            Assert.That(random.NextInt(), Is.EqualTo(-2030414680));
         }
 
         [Test]
@@ -29,7 +28,7 @@ namespace FPTesting {
         {
             var random = new Random(345345346);
             for (uint i = 5; i < 100; i++) {
-                random.NextInt(30).Should().BeLessThan(31);
+                Assert.That(random.NextInt(30), Is.LessThan(31));
             }
         }
         
@@ -38,7 +37,7 @@ namespace FPTesting {
         {
             var random = new Random(345345346);
             for (var i = 0; i < 100; i++) { 
-                random.NextInt(-30, 30).Should().BeInRange(-30, 30);
+                Assert.That(random.NextInt(-30, 30), Is.InRange(-30, 30));
             }
         }
         
@@ -46,10 +45,10 @@ namespace FPTesting {
         public void FpTest()
         {
             var random = new Random(645);
-            random.NextFp().value.Should().Be(2628L);
+            Assert.That(random.NextFp().value, Is.EqualTo(2628L));
             
             random.SetState(435);
-            random.NextFp().value.Should().Be(1786L);
+            Assert.That(random.NextFp().value, Is.EqualTo(1786L));
         }
         
         [Test]
@@ -57,8 +56,7 @@ namespace FPTesting {
         {
             var random = new Random(345345346);
             for (uint i = 5; i < 100; i++) {
-                var val = random.NextFp(fp._100);
-                val.Should().BeLessThan(fp._100);
+                Assert.That(random.NextFp(fp._100), Is.LessThan(fp._100));
             }
         }
         
@@ -67,8 +65,7 @@ namespace FPTesting {
         {
             var random = new Random(345345346);
             for (uint i = 5; i < 100; i++) {
-                var val = random.NextFp(fp._99, fp._100);
-                val.Should().BeInRange(fp._99, fp._100);
+                Assert.That(random.NextFp(fp._99, fp._100), Is.InRange(fp._99, fp._100));
             }
         }
     }

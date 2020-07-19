@@ -1,5 +1,4 @@
 ﻿using FixedPoint;
-using FluentAssertions;
 using NUnit.Framework;
 
 namespace FPTesting
@@ -10,22 +9,22 @@ namespace FPTesting
         public void ToStringTest()
         {
             var originalFp = fp._1 - fp._0_01;
-            originalFp.ToString().Should().Be("0.99001");
+            Assert.That(originalFp.ToString(), Is.EqualTo("0.99001"));
             
             originalFp = fp._1 - fp._0_01 *fp._0_01;
-            originalFp.ToString().Should().Be("0.99991");
+            Assert.That(originalFp.ToString(), Is.EqualTo("0.99991"));
             
             originalFp = fp._1;
-            originalFp.ToString().Should().Be("1.00000");
+            Assert.That(originalFp.ToString(), Is.EqualTo("1.00000"));
             
             originalFp = fp._1 + fp._0_01;
-            originalFp.ToString().Should().Be("1.00999");
+            Assert.That(originalFp.ToString(), Is.EqualTo("1.00999"));
             
             originalFp = fp._0_01;
-            originalFp.ToString().Should().Be("0.00999");
+            Assert.That(originalFp.ToString(), Is.EqualTo("0.00999"));
             
             originalFp = fp._0_50;
-            originalFp.ToString().Should().Be("0.50000");
+            Assert.That(originalFp.ToString(), Is.EqualTo("0.50000"));
         }
         
         [Test]
@@ -63,10 +62,10 @@ namespace FPTesting
         [Test]
         public void AsIntTest() {
             var val = fp._0_25 + fp._1;
-            val.AsInt.Should().Be(1);
+            Assert.That(val.AsInt, Is.EqualTo(1));
             
             val = -fp._0_25 - fp._1;
-            val.AsInt.Should().Be(-2);
+            Assert.That(val.AsInt, Is.EqualTo(-2));
         }
     }
 }

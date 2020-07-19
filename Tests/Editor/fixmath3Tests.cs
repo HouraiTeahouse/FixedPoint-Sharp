@@ -1,8 +1,6 @@
-﻿using FixedPoint;
-using FluentAssertions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace FPTesting
+namespace FixedPoint
 {
     public class fixmath3Tests
     {
@@ -12,7 +10,7 @@ namespace FPTesting
             var originalVector = new fp3(fp._5, fp._0, fp._0);
             var modifiedVector = fixmath.Normalize(originalVector);
 
-            modifiedVector.Should().Be(new fp3(fp._1, fp._0, fp._0));
+            Assert.That(modifiedVector, Is.EqualTo(new fp3(fp._1, fp._0, fp._0)));
         }
         
         [Test]
@@ -21,7 +19,7 @@ namespace FPTesting
             var originalVector = new fp3(fp._5, fp._0, fp._0);
             var magnitude = fixmath.Magnitude(originalVector);
 
-            magnitude.Should().Be(fp._5);
+            Assert.That(magnitude, Is.EqualTo(fp._5));
         }   
         
         [Test]
@@ -30,7 +28,7 @@ namespace FPTesting
             var originalVector = new fp3(fp._5, fp._0, fp._0);
             var magnitude      = fixmath.MagnitudeSqr(originalVector);
 
-            magnitude.Should().Be(fp._5 * fp._5);
+            Assert.That(magnitude, Is.EqualTo(fp._5 * fp._5));
         }
 
         [Test]
@@ -39,9 +37,9 @@ namespace FPTesting
             var originalVector = new fp3(fp._5, fp._0, fp._0);
             var clampedVector      = fixmath.MagnitudeClamp(originalVector, fp._1_10);
 
-            clampedVector.x.AsFloat.Should().BeApproximately(1.10f, 0.01f);
-            clampedVector.y.AsFloat.Should().Be(0f);
-            clampedVector.z.AsFloat.Should().Be(0f);
+            Assert.That(clampedVector.x.AsFloat, Is.EqualTo(1.10f).Within(0.01f));
+            Assert.That(clampedVector.y.AsFloat, Is.EqualTo(0f));
+            Assert.That(clampedVector.z.AsFloat, Is.EqualTo(0f));
         }
         
         [Test]
@@ -51,13 +49,13 @@ namespace FPTesting
             var vector2 = new fp3(fp._5, fp._0, fp._0);
             var dot = fixmath.Dot(vector1, vector2);
 
-            dot.Should().Be(fp._5 * fp._5);
+            Assert.That(dot, Is.EqualTo(fp._5 * fp._5));
             
             vector1 = new fp3(fp._1, fp._5, fp._4);
             vector2 = new fp3(fp._2, fp._0, fp._1);
             dot     = fixmath.Dot(vector1, vector2);
 
-            dot.Should().Be(fp._6);
+            Assert.That(dot, Is.EqualTo(fp._6));
             
             vector1 = new fp3(fp._0_10, fp._0_75,   fp._0_10);
             vector2 = new fp3(fp._0_50+fp._0_10, fp._0_20, fp._0_33);
@@ -65,7 +63,7 @@ namespace FPTesting
 
             var str = $"{vector1.x.AsFloat},{vector1.y.value},{vector1.z.value} | {vector2} {dot}";
 
-            dot.AsFloat.Should().BeApproximately(0.243f, 0.01f);
+            Assert.That(dot.AsFloat, Is.EqualTo(0.243f).Within(0.01f));
         }
 
         [Test]
@@ -75,13 +73,13 @@ namespace FPTesting
             var vector2 = new fp3(fp._2, fp._0, fp._1);
             var angle     = fixmath.Angle(vector1, vector2);
 
-            angle.AsInt.Should().Be(65);
+            Assert.That(angle.AsInt, Is.EqualTo(65));
             
             vector1 = new fp3(fp._2, fp._1,   fp._1);
             vector2 = new fp3(fp._2, fp._0, fp._1);
             angle = fixmath.Angle(vector1, vector2);
 
-            angle.AsInt.Should().Be(24);
+            Assert.That(angle.AsInt, Is.EqualTo(24));
         }
 
         [Test]
@@ -91,13 +89,13 @@ namespace FPTesting
             var vector2 = new fp3(fp._2, fp._0, fp._1);
             var angle   = fixmath.AngleSigned(vector1, vector2, fp3.up);
 
-            angle.AsInt.Should().Be(65);
+            Assert.That(angle.AsInt, Is.EqualTo(65));
             
             vector1 = new fp3(-fp._2, fp._1,   fp._1);
             vector2 = new fp3(fp._2, fp._1, fp._1);
             angle   = fixmath.AngleSigned(vector1, vector2, fp3.up);
 
-            angle.AsFloat.Should().BeApproximately(109.47f, 0.1f);
+            Assert.That(angle.AsFloat, Is.EqualTo(109.47f).Within(0.1f));
         }
         
         [Test]
@@ -107,13 +105,13 @@ namespace FPTesting
             var vector2 = new fp3(fp._2, fp._0, fp._1);
             var angle   = fixmath.Radians(vector1, vector2);
 
-            angle.AsInt.Should().Be(1);
+            Assert.That(angle.AsInt, Is.EqualTo(1));
             
             vector1 = new fp3(fp._2, fp._1,   fp._1);
             vector2 = new fp3(fp._2, fp._0, fp._1);
             angle   = fixmath.Radians(vector1, vector2);
             
-            angle.AsFloat.Should().BeApproximately(0.42f, 0.01f);
+            Assert.That(angle.AsFloat, Is.EqualTo(0.42f).Within(0.01f));
         }
 
         [Test]
@@ -123,7 +121,7 @@ namespace FPTesting
             var vector2 = new fp3(fp._2, fp._0, fp._1);
             var cross   = fixmath.Cross(vector1, vector2);
 
-            cross.Should().Be(new fp3(fp._5, fp._7, -fp._10));
+            Assert.That(cross, Is.EqualTo(new fp3(fp._5, fp._7, -fp._10)));
         }
 
         [Test]
@@ -133,7 +131,7 @@ namespace FPTesting
             var normal     = new fp3(-fp._1, fp._0, fp._0);
             var reflection = fixmath.Reflect(vector, normal);
 
-            reflection.Should().Be(new fp3(-fp._5, fp._0, fp._5));
+            Assert.That(reflection, Is.EqualTo(new fp3(-fp._5, fp._0, fp._5)));
         }
         
         [Test]
@@ -143,7 +141,7 @@ namespace FPTesting
             var normal     = new fp3(-fp._1, fp._0, fp._0);
             var projection = fixmath.Project(vector, normal);
 
-            projection.Should().Be(new fp3(fp._5, fp._0, fp._0));
+            Assert.That(projection, Is.EqualTo(new fp3(fp._5, fp._0, fp._0)));
         }
 
         [Test]
@@ -153,7 +151,7 @@ namespace FPTesting
             var normal     = new fp3(-fp._1, fp._0, fp._0);
             var projection = fixmath.ProjectOnPlane(vector, normal);
 
-            projection.Should().Be(new fp3(fp._0, fp._1, fp._5));
+            Assert.That(projection, Is.EqualTo(new fp3(fp._0, fp._1, fp._5)));
         }
 
         [Test]
@@ -163,7 +161,7 @@ namespace FPTesting
             var to     = new fp3(fp._0, fp._0, fp._0);
             var lerped = fixmath.Lerp(@from, to, fp._0_50);
 
-            lerped.Should().Be(new fp3(fp._2+fp._0_50, fp._0, fp._2 +fp._0_50));
+            Assert.That(lerped, Is.EqualTo(new fp3(fp._2+fp._0_50, fp._0, fp._2 +fp._0_50)));
         }
 
         [Test]
@@ -173,10 +171,10 @@ namespace FPTesting
             var target = new fp3(fp._5, fp._1, fp._1);
 
             var step1 = fixmath.MoveTowards(current, target, fp._1);
-            step1.Should().Be(new fp3(fp._2, fp._1, fp._1));
+            Assert.That(step1, Is.EqualTo(new fp3(fp._2, fp._1, fp._1)));
             
             var step2 = fixmath.MoveTowards(current, target, fp._10);
-            step2.Should().Be(new fp3(fp._5, fp._1, fp._1));
+            Assert.That(step2, Is.EqualTo(new fp3(fp._5, fp._1, fp._1)));
         }
     }
 }

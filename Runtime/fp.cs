@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace FixedPoint {
     [Serializable]
     [StructLayout(LayoutKind.Explicit)]
-    public struct fp : IEquatable<fp>, IComparable<fp> {
+    public struct fp : IEquatable<fp>, IComparable, IComparable<fp> {
         public const int SIZE = 8;
 
         public static readonly fp max        = new fp(long.MaxValue);
@@ -296,6 +296,10 @@ namespace FixedPoint {
 
         public int CompareTo(fp other) {
             return value.CompareTo(other.value);
+        }
+
+        int IComparable.CompareTo(object other) {
+            return value.CompareTo(((fp)other).value);
         }
 
         public bool Equals(fp other) {
